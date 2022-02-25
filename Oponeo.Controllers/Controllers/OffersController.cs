@@ -43,6 +43,7 @@ public class OffersController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(201)]
     // POST: /offers
     public ActionResult CreateOffer([FromBody] CreateOffer offerModel)
     {
