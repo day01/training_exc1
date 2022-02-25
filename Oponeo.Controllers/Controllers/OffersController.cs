@@ -1,49 +1,56 @@
 using AutoMapper;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Oponeo.Contract;
+using Oponeo.Contracts.Offers;
 using Oponeo.Domain;
 
 namespace Oponeo.Controllers.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("offers")]
 public class OffersController : ControllerBase
 {
+    private readonly IRepository _repository;
     private readonly IMapper _mapper;
-    private readonly IOfferRepository _offerRepository;
 
-    public OffersController(IMapper mapper, IOfferRepository offerRepository)
+    public OffersController(IRepository repository, IMapper mapper)
     {
+        _repository = repository;
         _mapper = mapper;
-        _offerRepository = offerRepository;
     }
-
-    [HttpGet("{id}", Name = nameof(GetOfferById))]
-    public ActionResult<OfferModel> GetOfferById(int id)
+    
+    // GET: /offers/active
+    [HttpGet(template:"active")]
+    public ActionResult<List<OfferReadModel>> GetActiveOffers()
     {
-        var offer = _offerRepository.GetById(id);
-        return Ok(offer);
+        throw new NotImplementedException();
+    }    
+    
+    // GET: /offers
+    [HttpGet]
+    public ActionResult<List<OfferReadModel>> GetOffers()
+    {
+        var offers = _repository.GetOffers();
+        var result = _mapper.Map<List<OfferReadModel>>(offers);
+
+        return Ok(result);
+    }
+    
+    // GET: /offers/{id}
+    [HttpGet("{id}", Name = nameof(GetOfferById))]
+    public ActionResult<List<OfferReadModel>> GetOfferById(long id)
+    {
+        throw new NotImplementedException();
     }
 
     [HttpPost]
-    public ActionResult CreateOffer([FromBody] OfferModel offerModel)
+    // POST: /offers
+    public ActionResult CreateOffer([FromBody] CreateOffer offerModel)
     {
+        _ = offerModel ?? throw new ArgumentException();
         var offer = _mapper.Map<Offer>(offerModel);
-        var result = _mapper.Map<OfferModel>(offer);
-        return CreatedAtRoute(nameof(GetOfferById), new {Id = 1}, result);
-    }
+        
+        _repository.AddOffer(offer);
 
-    [HttpPatch("{id}")]
-    public ActionResult PartialUpdateOffer(int id, JsonPatchDocument<OfferModel> patchDocument)
-    {
-        var offer = new Offer() {Id = id};
-        var model = _mapper.Map<OfferModel>(offer);
-
-        patchDocument.ApplyTo(model);
-
-        _mapper.Map(model, offer);
-
-        return NoContent();
+        return CreatedAtRoute(nameof(GetOfferById), new {id = offer.Id}, offer);
     }
 }

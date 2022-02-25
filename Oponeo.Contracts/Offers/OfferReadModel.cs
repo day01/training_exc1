@@ -1,8 +1,8 @@
-namespace Oponeo.Domain;
+namespace Oponeo.Contracts.Offers;
 
-public class Offer
+public class OfferReadModel
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     public int Size { get; set; }
 

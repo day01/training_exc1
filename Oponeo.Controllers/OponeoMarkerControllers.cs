@@ -1,6 +1,6 @@
 namespace Oponeo.Controllers;
 
-public class OfferControllerMarker
+public class OponeoMarkerControllers
 {
     
 }

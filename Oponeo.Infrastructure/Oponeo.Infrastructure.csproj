@@ -7,11 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Autofac" Version="6.3.0" />
+        <ProjectReference Include="..\Oponeo.Controllers\Oponeo.Controllers.csproj" />
+        <ProjectReference Include="..\Oponeo.Domain\Oponeo.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Oponeo.Domain\Oponeo.Domain.csproj" />
+        <PackageReference Include="Autofac" Version="6.3.0" />
     </ItemGroup>
 
 </Project>
