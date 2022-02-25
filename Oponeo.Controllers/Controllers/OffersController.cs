@@ -1,4 +1,6 @@
+using System.Net;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Oponeo.Contracts.Offers;
 using Oponeo.Domain;
@@ -43,7 +45,7 @@ public class OffersController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(201)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
     // POST: /offers
     public ActionResult CreateOffer([FromBody] CreateOffer offerModel)
     {
@@ -53,5 +55,21 @@ public class OffersController : ControllerBase
         _repository.AddOffer(offer);
 
         return CreatedAtRoute(nameof(GetOfferById), new {id = offer.Id}, offer);
+    }
+
+    [HttpPatch("{id}")]
+    public ActionResult PatchOffer(long id, JsonPatchDocument<OfferModel> patchDocumentOfferModel)
+    {
+        var offer = _repository.GetOffer(id);
+
+        var offerModel = _mapper.Map<OfferModel>(offer);
+        
+        patchDocumentOfferModel.ApplyTo(offerModel);
+
+        var offerToUpdate = _mapper.Map<Offer>(offerModel);
+
+        _repository.UpdateOffer(offerToUpdate);
+        
+        return NoContent();
     }
 }

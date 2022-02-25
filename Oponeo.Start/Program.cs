@@ -12,7 +12,9 @@ assemblies.Add(typeof(OponeoMarkerControllers).Assembly);
 
 builder.Services.AddSingleton<IRepository, MockRepository>();
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddNewtonsoftJson();
 builder.Services.AddAutoMapper(assemblies);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

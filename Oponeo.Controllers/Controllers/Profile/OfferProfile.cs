@@ -12,5 +12,9 @@ public class OfferProfile : AutoMapper.Profile
             .ForMember(x => x.CreatedDate, opt => opt.Ignore());
 
         CreateMap<Offer, OfferReadModel>();
+
+        CreateMap<Offer, OfferModel>();
+        CreateMap<OfferModel, Offer>();
+        CreateMap<Offer, Offer>();
     }
 }

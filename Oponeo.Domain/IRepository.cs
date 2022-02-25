@@ -7,4 +7,8 @@ public interface IRepository
     List<Offer> GetOffers();
 
     void AddOffer(Offer offer);
+
+    Offer? GetOffer(long id);
+
+    void UpdateOffer(Offer offerToUpdate);
 }
