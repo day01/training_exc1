@@ -20,7 +20,7 @@ public class MockRepository : IRepository
             Id = 1000,
             CreatedDate = DateTime.Now,
             DeletedDate = null,
-            OptionOfferStatus = "Option1",
+            OptionOfferStatus = "Active",
             Option2 = 2,
             Status = OfferStatus.Active,
             ProductName = "Example",

@@ -13,7 +13,12 @@ public class OfferProfile : AutoMapper.Profile
 
         CreateMap<Offer, OfferReadModel>()
             .ForMember(x => x.PresentationOpetion2InMeters,
-                opt => opt.MapFrom(y => $"{y.Option2 * 1000} m"));
+                opt => opt.MapFrom(y => $"{y.Option2 * 1000} m"))
+            .ForMember(
+                x => x.Option2,
+                opt => opt.MapFrom(y=> (OfferStatus)Enum.Parse(typeof(OfferStatus), y.OptionOfferStatus)));
+                // Nie robimy tak
+                // opt => opt.MapFrom(y=> OfferStatus.TryParse(y.OptionOfferStatus, var out st) ? st : OfferStatus.Unknown));
 
         CreateMap<Offer, OfferModel>();
         CreateMap<OfferModel, Offer>();
