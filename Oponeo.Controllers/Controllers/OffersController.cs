@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Oponeo.Contracts.Offers;
 using Oponeo.Domain;
 
@@ -13,23 +14,36 @@ public class OffersController : ControllerBase
     private readonly IRepository _repository;
     private readonly IMapper _mapper;
     private readonly IOponeoAddingService _oponeoAddingService;
+    private readonly IMemoryCache _memoryCache;
 
     public OffersController(
         IRepository repository,
         IMapper mapper,
-        IOponeoAddingService oponeoAddingService)
+        IOponeoAddingService oponeoAddingService,
+        IMemoryCache memoryCache)
     {
         _repository = repository;
         _mapper = mapper;
         _oponeoAddingService = oponeoAddingService;
+        _memoryCache = memoryCache;
     }
     
     // GET: /offers/active
     [HttpGet(template:"active")]
     public ActionResult<List<OfferReadModel>> GetActiveOffers()
     {
+        const string activeOffersKey = "CACHE_KEY:ACTIVE_OFFERS";
+        var exists = _memoryCache.TryGetValue(activeOffersKey, out var cachedOffers);
+        if (exists)
+        {
+            return Ok(cachedOffers);
+        }
+
         var offers = _repository.GetActiveOffers();
         var result = _mapper.Map<List<OfferReadModel>>(offers);
+
+        const int offerCacheTimeInHours = 1;
+        _memoryCache.Set(activeOffersKey, result, TimeSpan.FromHours(offerCacheTimeInHours));
 
         return Ok(result);
     }    

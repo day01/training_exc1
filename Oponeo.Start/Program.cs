@@ -25,6 +25,7 @@ builder.Services.AddAutoMapper(assemblies);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddResponseCaching();
+builder.Services.AddMemoryCache();
 
 builder.Host
     .UseServiceProviderFactory(new AutofacServiceProviderFactory(options =>
