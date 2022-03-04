@@ -1,6 +1,6 @@
 namespace Oponeo.Domain;
 
-public class OponeoAddingService : IOponeoAddingService
+public class OponeoAddingService : IOponeoAddingService, IIocScoped
 {
     private readonly IRepository _repository;
 

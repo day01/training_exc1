@@ -12,11 +12,16 @@ public class OffersController : ControllerBase
 {
     private readonly IRepository _repository;
     private readonly IMapper _mapper;
+    private readonly IOponeoAddingService _oponeoAddingService;
 
-    public OffersController(IRepository repository, IMapper mapper)
+    public OffersController(
+        IRepository repository,
+        IMapper mapper,
+        IOponeoAddingService oponeoAddingService)
     {
         _repository = repository;
         _mapper = mapper;
+        _oponeoAddingService = oponeoAddingService;
     }
     
     // GET: /offers/active

@@ -9,15 +9,10 @@ public class OponeoModule: Module
     {
         base.Load(builder);
 
-        // builder
-        //     .RegisterType<MockRepository>()
-        //     .AsImplementedInterfaces()
-        //     .InstancePerLifetimeScope();
-        
-            // Lifetime Scope
-            
-            // Scoped - na czas życia Lifetime Scope
-            // Transient | PerDependency - kazde uzycie tworz nowy obiekt
-            // Singleton | SingleInstance
+        builder
+            .RegisterAssemblyTypes(typeof(Offer).Assembly, ThisAssembly)
+            .Where(x => x.IsAssignableTo<IIocScoped>())
+            .AsImplementedInterfaces()
+            .InstancePerLifetimeScope();
     }
 }

@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Host
     .UseServiceProviderFactory(new AutofacServiceProviderFactory(options =>
-        options.RegisterAssemblyModules()));
+        options.RegisterAssemblyModules(assemblies.ToArray())));
 
 var app = builder.Build();
 
