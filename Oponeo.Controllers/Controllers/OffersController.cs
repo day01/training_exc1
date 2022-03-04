@@ -30,7 +30,7 @@ public class OffersController : ControllerBase
     
     // GET: /offers/active
     [HttpGet(template:"active")]
-    public ActionResult<List<OfferReadModel>> GetActiveOffers()
+    public async Task<ActionResult<List<OfferReadModel>>> GetActiveOffers()
     {
         const string activeOffersKey = "CACHE_KEY:ACTIVE_OFFERS";
         var exists = _memoryCache.TryGetValue(activeOffersKey, out var cachedOffers);
@@ -39,7 +39,7 @@ public class OffersController : ControllerBase
             return Ok(cachedOffers);
         }
 
-        var offers = _repository.GetActiveOffers();
+        var offers = await _repository.GetActiveOffers();
         var result = _mapper.Map<List<OfferReadModel>>(offers);
 
         const int offerCacheTimeInHours = 1;
@@ -50,9 +50,9 @@ public class OffersController : ControllerBase
     
     // GET: /offers
     [HttpGet]
-    public ActionResult<List<OfferReadModel>> GetOffers()
+    public async Task<ActionResult<List<OfferReadModel>>> GetOffers()
     {
-        var offers = _repository.GetOffers();
+        var offers =  await _repository.GetOffers();
         var result = _mapper.Map<List<OfferReadModel>>(offers);
 
         return Ok(result);
@@ -68,18 +68,18 @@ public class OffersController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     // POST: /offers
-    public ActionResult CreateOffer([FromBody] CreateOffer offerModel)
+    public async Task<ActionResult> CreateOffer([FromBody] CreateOffer offerModel)
     {
         _ = offerModel ?? throw new ArgumentException();
         var offer = _mapper.Map<Offer>(offerModel);
         
-        _repository.AddOffer(offer);
+        await _repository.AddOffer(offer);
 
         return CreatedAtRoute(nameof(GetOfferById), new {id = offer.Id}, offer);
     }
 
     [HttpPatch("{id}")]
-    public ActionResult PatchOffer(long id, JsonPatchDocument<OfferModel> patchDocumentOfferModel)
+    public async Task<ActionResult> PatchOffer(long id, JsonPatchDocument<OfferModel> patchDocumentOfferModel)
     {
         var offer = _repository.GetOffer(id);
 
@@ -89,8 +89,28 @@ public class OffersController : ControllerBase
 
         var offerToUpdate = _mapper.Map<Offer>(offerModel);
 
-        _repository.UpdateOffer(offerToUpdate);
+        await _repository.UpdateOffer(offerToUpdate);
         
         return NoContent();
+    }
+
+    [HttpPost(template: "reserve/{id}")]
+    public async Task<ActionResult> ReserveOffer([FromRoute] int id)
+    {
+        var offer = await _repository.GetOffer(id);
+        if (offer is null)
+        {
+            return NotFound(id);
+        }
+        
+        const string reserveOffersKey = "CACHE_KEY:ACTIVE_OFFERS:";
+        if (_memoryCache.TryGetValue(reserveOffersKey + id, out var reserveId))
+        {
+            return BadRequest("Object is reserved");
+        }
+
+        _memoryCache.Set(reserveOffersKey + id, id, TimeSpan.FromSeconds(10));
+
+        return Ok();
     }
 }

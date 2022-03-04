@@ -1,5 +1,4 @@
 using AutoMapper;
-using Oponeo.Contracts.Offers;
 using Oponeo.Domain;
 
 namespace Oponeo.Infrastructure;
@@ -27,42 +26,47 @@ public class MockRepository : IRepository, IIocSingle
             Size = 100,
         }
     };
-    
+
     public void IncreaseSizeById(long id)
     {
         return;
     }
 
-    public List<Offer> GetOffers()
+    public Task<List<Offer>> GetOffers()
     {
-        return Offers;
+        return Task.FromResult(Offers);
     }
 
-    public List<Offer> GetActiveOffers()
+    public Task<List<Offer>> GetActiveOffers()
     {
-        return Offers
+        var result = Offers
             .Where(x => x.Status == OfferStatus.Active)
             .ToList();
+
+        return Task.FromResult(result);
     }
 
-    public void AddOffer(Offer offer)
+    public Task AddOffer(Offer offer)
     {
         var maxPrimaryKey = Offers.Max(x => (long?) x.Id) ?? 0;
         offer.Id = maxPrimaryKey + 1;
         offer.CreatedDate = DateTime.Now;
         offer.Status = OfferStatus.Active;
-            
+
         Offers.Add(offer);
-    }
 
-    public Offer? GetOffer(long id)
+        return Task.CompletedTask;
+    }
+    public Task<Offer?> GetOffer(long id)
     {
-        return Offers.FirstOrDefault(x => x.Id == id);
+        return Task.FromResult(Offers.FirstOrDefault(x => x.Id == id));
     }
 
-    public void UpdateOffer(Offer offerToUpdate)
+    public Task UpdateOffer(Offer offerToUpdate)
     {
         var offer = Offers.First(x => x.Id == offerToUpdate.Id);
         _mapper.Map(offerToUpdate, offer);
+
+        return Task.CompletedTask;
     }
 }

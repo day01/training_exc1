@@ -4,13 +4,13 @@ public interface IRepository
 {
     void IncreaseSizeById(long id);
 
-    List<Offer> GetOffers();
+    Task<List<Offer>> GetOffers();
 
-    List<Offer> GetActiveOffers();
+    Task<List<Offer>> GetActiveOffers();
 
-    void AddOffer(Offer offer);
+    Task AddOffer(Offer offer);
 
-    Offer? GetOffer(long id);
+    Task<Offer?> GetOffer(long id);
 
-    void UpdateOffer(Offer offerToUpdate);
+    Task UpdateOffer(Offer offerToUpdate);
 }

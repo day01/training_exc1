@@ -34,4 +34,29 @@ public class ConfigurationController : ControllerBase
 
         return Ok(result);
     }
+    
+    [HttpGet("example/async-test")]
+    public async Task<string[]> GetExampleCall([FromQuery] string abc, [FromHeader] string xyz)
+    {
+        var taskOfLongRunningFunc = privateLongRunningFunc();
+        var task2 = privateLongRunningFunc();
+        
+        foreach (var i in new [] {1,3,4,5})
+        {
+            
+        }
+        
+        var result = await taskOfLongRunningFunc;
+
+        return result.Take(2).ToArray();
+    }
+
+    private async Task<string[]> privateLongRunningFunc()
+    {
+        var result = new[] {"Product-1", "Product-2", "Product-3"};
+
+        await Task.Delay(100000000);
+
+        return result;
+    }
 }
