@@ -6,6 +6,8 @@ public interface IRepository
 
     List<Offer> GetOffers();
 
+    List<Offer> GetActiveOffers();
+
     void AddOffer(Offer offer);
 
     Offer? GetOffer(long id);

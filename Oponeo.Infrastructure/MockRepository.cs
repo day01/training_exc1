@@ -23,11 +23,19 @@ public class MockRepository : IRepository
         return Offers;
     }
 
+    public List<Offer> GetActiveOffers()
+    {
+        return Offers
+            .Where(x => x.Status == OfferStatus.Active)
+            .ToList();
+    }
+
     public void AddOffer(Offer offer)
     {
         var maxPrimaryKey = Offers.Max(x => (long?) x.Id) ?? 0;
         offer.Id = maxPrimaryKey + 1;
         offer.CreatedDate = DateTime.Now;
+        offer.Status = OfferStatus.Active;
             
         Offers.Add(offer);
     }

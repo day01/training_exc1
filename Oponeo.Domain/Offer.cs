@@ -9,4 +9,6 @@ public class Offer
     public string? ProductName { get; set; }
 
     public DateTime CreatedDate { get; set; }
+
+    public OfferStatus Status { get; set; }
 }

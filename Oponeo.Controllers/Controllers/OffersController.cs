@@ -1,4 +1,3 @@
-using System.Net;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +23,10 @@ public class OffersController : ControllerBase
     [HttpGet(template:"active")]
     public ActionResult<List<OfferReadModel>> GetActiveOffers()
     {
-        throw new NotImplementedException();
+        var offers = _repository.GetActiveOffers();
+        var result = _mapper.Map<List<OfferReadModel>>(offers);
+
+        return Ok(result);
     }    
     
     // GET: /offers
