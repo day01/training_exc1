@@ -14,5 +14,11 @@ public class OponeoModule: Module
             .Where(x => x.IsAssignableTo<IIocScoped>())
             .AsImplementedInterfaces()
             .InstancePerLifetimeScope();
+
+        builder
+            .RegisterAssemblyTypes(typeof(Offer).Assembly, ThisAssembly)
+            .Where(x => x.IsAssignableTo<IIocSingle>())
+            .AsImplementedInterfaces()
+            .SingleInstance();
     }
 }

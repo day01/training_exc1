@@ -2,16 +2,15 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using Oponeo.Controllers;
-using Oponeo.Domain;
 using Oponeo.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 assemblies.Add(typeof(OponeoMarkerControllers).Assembly);
+assemblies.Add(typeof(MockRepository).Assembly);
 // Add services to the container.
 
-builder.Services.AddSingleton<IRepository, MockRepository>();
 
 builder.Services
     .AddControllers()
