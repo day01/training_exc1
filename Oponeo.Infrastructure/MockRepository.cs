@@ -1,4 +1,5 @@
 using AutoMapper;
+using Oponeo.Contracts.Offers;
 using Oponeo.Domain;
 
 namespace Oponeo.Infrastructure;

@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Newtonsoft.Json.Converters;
 using Oponeo.Controllers;
 using Oponeo.Domain;
 using Oponeo.Infrastructure;
@@ -14,7 +15,10 @@ builder.Services.AddSingleton<IRepository, MockRepository>();
 
 builder.Services
     .AddControllers()
-    .AddNewtonsoftJson();
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+    });
 builder.Services.AddAutoMapper(assemblies);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
