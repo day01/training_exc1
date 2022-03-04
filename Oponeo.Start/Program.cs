@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using Oponeo.Controllers;
 using Oponeo.Infrastructure;
+using Oponeo.Start.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,8 @@ app.UseResponseCaching();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.Use(CustomLoggingMiddleware.Handle());
 
 app.MapControllers();
 
