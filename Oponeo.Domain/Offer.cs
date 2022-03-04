@@ -11,4 +11,10 @@ public class Offer
     public DateTime CreatedDate { get; set; }
 
     public OfferStatus Status { get; set; }
+
+    public string OptionOfferStatus { get; set; }
+
+    public int Option2 { get; set; }
+
+    public DateTime? DeletedDate { get; set; }
 }

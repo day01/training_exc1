@@ -19,6 +19,7 @@ builder.Services
     {
         options.SerializerSettings.Converters.Add(new StringEnumConverter());
     });
+
 builder.Services.AddAutoMapper(assemblies);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -11,7 +11,9 @@ public class OfferProfile : AutoMapper.Profile
             .ForMember(x => x.Id, opt => opt.Ignore())
             .ForMember(x => x.CreatedDate, opt => opt.Ignore());
 
-        CreateMap<Offer, OfferReadModel>();
+        CreateMap<Offer, OfferReadModel>()
+            .ForMember(x => x.PresentationOpetion2InMeters,
+                opt => opt.MapFrom(y => $"{y.Option2 * 1000} m"));
 
         CreateMap<Offer, OfferModel>();
         CreateMap<OfferModel, Offer>();

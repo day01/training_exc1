@@ -12,7 +12,21 @@ public class MockRepository : IRepository
     {
         _mapper = mapper;
     }
-    public List<Offer> Offers { get; set; } = new();
+
+    public List<Offer> Offers { get; set; } = new()
+    {
+        new()
+        {
+            Id = 1000,
+            CreatedDate = DateTime.Now,
+            DeletedDate = null,
+            OptionOfferStatus = "Option1",
+            Option2 = 2,
+            Status = OfferStatus.Active,
+            ProductName = "Example",
+            Size = 100,
+        }
+    };
     
     public void IncreaseSizeById(long id)
     {
