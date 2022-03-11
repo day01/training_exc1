@@ -3,7 +3,7 @@ using Oponeo.Domain;
 
 namespace Oponeo.Infrastructure;
 
-public class MockRepository : IRepository, IIocSingle
+public class MockRepository : IRepository
 {
     private readonly IMapper _mapper;
 
