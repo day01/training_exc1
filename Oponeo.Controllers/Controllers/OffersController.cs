@@ -71,6 +71,7 @@ public class OffersController : ControllerBase
     public async Task<ActionResult> CreateOffer([FromBody] CreateOffer offerModel)
     {
         _ = offerModel ?? throw new ArgumentException();
+        
         var offer = _mapper.Map<Offer>(offerModel);
         
         await _repository.AddOffer(offer);
@@ -90,6 +91,17 @@ public class OffersController : ControllerBase
         var offerToUpdate = _mapper.Map<Offer>(offerModel);
 
         await _repository.UpdateOffer(offerToUpdate);
+        
+        return NoContent();
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> PutOffer(long id, [FromBody] object offerToUpdate)
+    {
+        var offer = await _repository.GetOffer(id);
+        
+        // dodajemy oferte do update'u
+        // dodajemy validacji do oferty
         
         return NoContent();
     }

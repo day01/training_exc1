@@ -17,4 +17,6 @@ public class Offer
     public int Option2 { get; set; }
 
     public DateTime? DeletedDate { get; set; }
+
+    public List<StringParameter> Parameters { get; set; }
 }

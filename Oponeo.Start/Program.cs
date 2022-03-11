@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FluentValidation.AspNetCore;
 using Newtonsoft.Json.Converters;
 using Oponeo.Controllers;
 using Oponeo.Infrastructure;
@@ -10,14 +11,17 @@ var builder = WebApplication.CreateBuilder(args);
 var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 assemblies.Add(typeof(OponeoMarkerControllers).Assembly);
 assemblies.Add(typeof(MockRepository).Assembly);
+
 // Add services to the container.
-
-
 builder.Services
     .AddControllers()
     .AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.Converters.Add(new StringEnumConverter());
+    })
+    .AddFluentValidation(options =>
+    {
+        options.RegisterValidatorsFromAssemblies(assemblies);
     });
 
 builder.Services.AddAutoMapper(assemblies);
