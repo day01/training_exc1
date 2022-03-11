@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Caching.Memory;
 using Oponeo.Contracts.Offers;
 using Oponeo.Domain;
@@ -96,12 +97,16 @@ public class OffersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> PutOffer(long id, [FromBody] object offerToUpdate)
+    public async Task<ActionResult> PutOffer(long id, [FromBody] OfferInsteadModel offerToUpdate)
     {
         var offer = await _repository.GetOffer(id);
-        
-        // dodajemy oferte do update'u
-        // dodajemy validacji do oferty
+        if (offer == null)
+        {
+            return BadRequest("Id doesnt exist");
+        }
+
+        _mapper.Map(offerToUpdate, offer);
+        await _repository.UpdateOffer(offer);
         
         return NoContent();
     }

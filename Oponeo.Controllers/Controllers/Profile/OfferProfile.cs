@@ -18,11 +18,13 @@ public class OfferProfile : AutoMapper.Profile
             .ForMember(
                 x => x.Option2,
                 opt => opt.MapFrom(y => (OfferStatus) Enum.Parse(typeof(OfferStatus), y.OptionOfferStatus)));
-        // Nie robimy tak
-        // opt => opt.MapFrom(y=> OfferStatus.TryParse(y.OptionOfferStatus, var out st) ? st : OfferStatus.Unknown));
 
         CreateMap<Offer, OfferModel>();
         CreateMap<OfferModel, Offer>();
+        
+        CreateMap<Offer, OfferInsteadModel>()
+            .ForMember(x=> x.Option2, opt=> opt.MapFrom(x=> x.Option2));
+        CreateMap<OfferInsteadModel, Offer>();
         CreateMap<Offer, Offer>();
 
         CreateMap<ContractParameter, StringParameter>();
