@@ -9,7 +9,9 @@ using Oponeo.Infrastructure;
 using Oponeo.Start.Configurations;
 using Oponeo.Start.Middleware;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication
+    .CreateBuilder(args);
+builder.Configuration.AddJsonFile($"appsettings.{Environment.MachineName}.json", optional: true);
 
 var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 assemblies.Add(typeof(OponeoMarkerControllers).Assembly);
