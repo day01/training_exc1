@@ -1,8 +1,10 @@
 namespace Oponeo.Domain;
 
-public class StringParameter
+public class StringParameter: Parameter
 {
-    public string Name { get; set; }
-    
     public string StringValue { get; set; }
+
+    // discriminator
+    public override string Type { get; set; } = "String";
+
 }

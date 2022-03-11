@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Oponeo.Domain;
 
 public class Offer

@@ -14,17 +14,18 @@ public class OponeoContext : DbContext
 
     public DbSet<ExampleObject> ExampleObjects { get; set; }
 
+    public DbSet<Offer> Offers { get; set; }
+
+    public DbSet<Parameter> Parameters { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<ExampleObject>().Configure();
-
         modelBuilder.Entity<SubExampleObject>().Configure();
-    }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
+        modelBuilder.Entity<Offer>().Configure();
+        modelBuilder.Entity<Parameter>().Configure();
     }
 }
