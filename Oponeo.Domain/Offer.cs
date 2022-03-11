@@ -18,5 +18,5 @@ public class Offer
 
     public DateTime? DeletedDate { get; set; }
 
-    public List<StringParameter> Parameters { get; set; }
+    public List<Parameter> Parameters { get; set; }
 }

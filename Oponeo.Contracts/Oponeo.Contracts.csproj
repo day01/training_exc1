@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Oponeo.Domain\Oponeo.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="10.3.6" />
+    </ItemGroup>
+
 </Project>
