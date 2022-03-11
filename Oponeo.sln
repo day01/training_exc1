@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oponeo.Infrastructure", "Op
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oponeo.Migrations", "Oponeo.Migrations\Oponeo.Migrations.csproj", "{47F06AAE-602B-4863-871F-3007A68E0B91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oponeo.DbUp", "Oponeo.DbUp\Oponeo.DbUp.csproj", "{7918013A-479E-417B-96A4-6262A8D9077B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{47F06AAE-602B-4863-871F-3007A68E0B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47F06AAE-602B-4863-871F-3007A68E0B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47F06AAE-602B-4863-871F-3007A68E0B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7918013A-479E-417B-96A4-6262A8D9077B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7918013A-479E-417B-96A4-6262A8D9077B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7918013A-479E-417B-96A4-6262A8D9077B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7918013A-479E-417B-96A4-6262A8D9077B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{198AF92D-C99A-4B5A-AD7A-7127E48679B6} = {5380DD38-5193-40DF-9970-A82023C555A8}
