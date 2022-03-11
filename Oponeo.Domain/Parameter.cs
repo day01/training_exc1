@@ -1,9 +1,7 @@
 namespace Oponeo.Domain;
 
-public abstract class Parameter
+public abstract class Parameter : Entity
 {
-    public long Id { get; set; }
-    
     public string Name { get; set; }
 
     public abstract string Type { get; set; }

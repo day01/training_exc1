@@ -1,6 +1,5 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Oponeo.Domain;
 
 namespace Oponeo.Infrastructure;
@@ -48,11 +47,11 @@ public class SqlRepository: IRepository, IIocScoped
         return _oponeoContext.Offers.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task UpdateOffer(Offer offerToUpdate)
+    public async Task UpdateOffer(Offer offerToUpdate)
     {
         var offer = _oponeoContext.Offers.First(x => x.Id == offerToUpdate.Id);
         _mapper.Map(offerToUpdate, offer);
 
-        return Task.CompletedTask;
+        await _oponeoContext.SaveChangesAsync();
     }
 }

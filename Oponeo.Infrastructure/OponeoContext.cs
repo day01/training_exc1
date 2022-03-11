@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oponeo.Domain;
 using Oponeo.Infrastructure.Builders;
 
@@ -27,5 +26,27 @@ public class OponeoContext : DbContext
 
         modelBuilder.Entity<Offer>().Configure();
         modelBuilder.Entity<Parameter>().Configure();
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    {
+        foreach (var auditEntity in ChangeTracker.Entries<Entity>())
+        {
+            if (auditEntity.State is EntityState.Added or EntityState.Modified or EntityState.Deleted)
+            {
+                auditEntity.Entity.ModifiedDate = DateTime.Now;
+
+                if (auditEntity.State is EntityState.Added)
+                {
+                    auditEntity.Entity.CreatedDate = DateTime.Now;
+                }
+                else if (auditEntity.State is EntityState.Deleted)
+                {
+                    auditEntity.Entity.DeletedDate = DateTime.Now;
+                }
+            }
+        }
+        
+        return base.SaveChangesAsync(cancellationToken);
     }
 }

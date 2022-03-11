@@ -2,23 +2,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Oponeo.Domain;
 
-public class Offer
+public class Offer : Entity
 {
-    public long Id { get; set; }
-
     public int Size { get; set; }
 
     public string? ProductName { get; set; }
-
-    public DateTime CreatedDate { get; set; }
 
     public OfferStatus Status { get; set; }
 
     public string OptionOfferStatus { get; set; }
 
     public int Option2 { get; set; }
-
-    public DateTime? DeletedDate { get; set; }
 
     public List<Parameter> Parameters { get; set; }
 }
