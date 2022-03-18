@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OponeoViewsAndAuth.Start.ViewModels;
 
@@ -47,12 +48,14 @@ public class OfferController : Controller
     }
 
     [HttpGet("/offer/{id}")]
+    [Authorize]
     public IActionResult Edit(long id)
     {
         return View("Edit");
     }
     
     [HttpPost("/offer/{id}")]
+    [Authorize(Roles = "Admin")]
     public IActionResult Edit(long id, [FromForm] EditOffer model)
     {
         return RedirectToAction("Index");
