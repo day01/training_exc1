@@ -55,6 +55,6 @@ public class OfferController : Controller
     [HttpPost("/offer/{id}")]
     public IActionResult Edit(long id, [FromForm] EditOffer model)
     {
-        return Redirect("Index");
+        return RedirectToAction("Index");
     }
 }
