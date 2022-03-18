@@ -17,7 +17,14 @@
             @foreach (var element in @Model)
             {
                 <tr>
-                    <td>@element</td>
+                    @if (element.StartsWith("b"))
+                    {
+                        <td style="color: darkred">@element</td>
+                    }
+                    @if (element.StartsWith("P"))
+                    {
+                        <td>@element</td>
+                    }
                 </tr>
             }
             </tbody>
