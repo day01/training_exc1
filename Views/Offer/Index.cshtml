@@ -27,6 +27,9 @@
         <th>
             @nameof(OponeoViewsAndAuth.Start.ViewModels.OfferReadModel.PresentationOption2InMeters)
         </th>
+        <th>
+            Dostęp akcje
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -40,6 +43,9 @@
             <td>@element.CreatedDate</td>
             <td>@element.ProductName</td>
             <td>@element.PresentationOption2InMeters</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@element.Id">Edytuj</a>
+            </td>
         </tr>
     }
     </tbody>
