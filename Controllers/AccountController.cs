@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +42,16 @@ namespace OponeoViewsAndAuth.Start.Controllers
             {
                 Name = User.Identity.Name,
                 EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
-                ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
+                ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value,
+                Nickname = User.Claims.FirstOrDefault(c => c.Type == "nickname")?.Value,
+                NameId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value,
+                EmailVerified =
+                    bool.TryParse(User.Claims.FirstOrDefault(c => c.Type == "email_verified")?.Value, out var ver)
+                        ? ver
+                        : false,
+                UpdatedAt = DateTime.TryParse(User.Claims.FirstOrDefault(c => c.Type == "")?.Value, out var date)
+                    ? date
+                    : null
             });
         }
 

@@ -10,13 +10,18 @@
 
             <div class="col-md-2">
                 <img src="@Model.ProfileImage"
-                     alt="" class="img-rounded img-responsive" />
+                     alt="" class="img-rounded img-responsive"/>
             </div>
             <div class="col-md-4">
                 <h3>@Model.Name</h3>
                 <p>
                     <i class="glyphicon glyphicon-envelope"></i> @Model.EmailAddress
                 </p>
+            </div>
+            <div class="col-md-4">
+                <h4>
+                    Nickname: @Model.Nickname
+                </h4>
             </div>
         </div>
     </div>
