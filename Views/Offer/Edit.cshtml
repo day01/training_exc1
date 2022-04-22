@@ -1,0 +1,15 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model OponeoViewsAndAuth.Start.ViewModels.EditOffer
+
+<p>Oferta:</p>
+
+<form method="post" asp-action="Edit">
+    <label asp-for="Size">Rozmiar</label>
+    <input asp-for="Size" type="number"/>
+    <br/>
+    <label asp-for="ProductName">Nazwa produktu</label>
+    <input asp-for="ProductName" type="text"/>
+
+    <br/>
+    <input type="submit"/>
+</form>
