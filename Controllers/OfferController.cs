@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OponeoViewsAndAuth.Start.ViewModels;
 
 namespace OponeoViewsAndAuth.Start.Controllers;
 
+[Authorize]
 public class OfferController : Controller
 {
     // GET
