@@ -7,4 +7,15 @@
     <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="TestProject1\**" />
+    <EmbeddedResource Remove="TestProject1\**" />
+    <Content Remove="TestProject1\**" />
+    <Compile Remove="TestProject1\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="TestProject1\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="TestProject1\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
+  </ItemGroup>
 </Project>
