@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OponeoViewsAndAuth.Start", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{676DE7F5-B16A-4561-94F3-085CB758E4F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OponeoBehavior.Specs", "OponeoBehavior.Specs\OponeoBehavior.Specs.csproj", "{AC63E29A-1657-4621-B551-072A0DD2D219}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{676DE7F5-B16A-4561-94F3-085CB758E4F4}.Release|x64.Build.0 = Release|Any CPU
 		{676DE7F5-B16A-4561-94F3-085CB758E4F4}.Release|x86.ActiveCfg = Release|Any CPU
 		{676DE7F5-B16A-4561-94F3-085CB758E4F4}.Release|x86.Build.0 = Release|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Debug|x64.Build.0 = Debug|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Debug|x86.Build.0 = Debug|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Release|x64.ActiveCfg = Release|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Release|x64.Build.0 = Release|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC63E29A-1657-4621-B551-072A0DD2D219}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

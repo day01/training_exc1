@@ -14,8 +14,20 @@
     <Compile Remove="TestProject1\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="OponeoBehavior.Specs\**" />
+    <EmbeddedResource Remove="OponeoBehavior.Specs\**" />
+    <Content Remove="OponeoBehavior.Specs\**" />
+    <Compile Remove="OponeoBehavior.Specs\**" />
+  </ItemGroup>
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="TestProject1\obj\project.assets.json" />
     <_ContentIncludedByDefault Remove="TestProject1\obj\project.packagespec.json" />
     <_ContentIncludedByDefault Remove="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="SpecFlow.Oponeo.Specs\bin\Debug\net6.0\SpecFlow.Oponeo.Specs.deps.json" />
+    <_ContentIncludedByDefault Remove="SpecFlow.Oponeo.Specs\bin\Debug\net6.0\SpecFlow.Oponeo.Specs.runtimeconfig.json" />
+    <_ContentIncludedByDefault Remove="SpecFlow.Oponeo.Specs\bin\Debug\net6.0\TestExecution.json" />
+    <_ContentIncludedByDefault Remove="SpecFlow.Oponeo.Specs\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="SpecFlow.Oponeo.Specs\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="SpecFlow.Oponeo.Specs\obj\SpecFlow.Oponeo.Specs.csproj.nuget.dgspec.json" />
   </ItemGroup>
 </Project>
