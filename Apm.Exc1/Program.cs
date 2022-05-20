@@ -8,6 +8,7 @@ var a = new ApmAsync();
 var count = int.Parse(args[0]);
 var list = new List<IAsyncResult>();
 
+Console.WriteLine("start");
 for (var i = 0; i < count; i++)
 {
     list.Add(a.CalculateSha());
@@ -27,3 +28,4 @@ foreach (var asyncResult in list)
     asyncResult.AsyncWaitHandle.WaitOne(10);
 }
 
+Console.WriteLine("end");
