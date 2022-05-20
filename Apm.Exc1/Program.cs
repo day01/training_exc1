@@ -27,5 +27,6 @@ foreach (var asyncResult in list)
     }
     asyncResult.AsyncWaitHandle.WaitOne(10);
 }
+Thread.Sleep(TimeSpan.FromSeconds(10));
 
 Console.WriteLine("end");
