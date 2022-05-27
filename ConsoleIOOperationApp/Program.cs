@@ -2,6 +2,7 @@
 
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using ConsoleIOOperationApp;
 
 Console.WriteLine("Great Oponeo App!");
 
@@ -35,14 +36,19 @@ sw.Start();
 Test2().Wait();
 sw.Stop();
 Console.WriteLine("Value of resource: " + resource2);
-Console.WriteLine("Time elapsed for Test1: {0}", sw.Elapsed);
+Console.WriteLine("Time elapsed for Test2: {0}", sw.Elapsed);
 
-//
-// sw.Start();
-// fileService.Test1().Wait();
-// sw.Stop();
-// Console.WriteLine("Value of resource: " + resource);
-// Console.WriteLine("Time elapsed for Test1: {0}", sw.Elapsed);
+sw.Start();
+fileService.Test1().Wait();
+sw.Stop();
+Console.WriteLine("Value of resource: " + resource);
+Console.WriteLine("Time elapsed for Test1 file: {0}", sw.Elapsed);
+
+sw.Start();
+fileService.Test2().Wait();
+sw.Stop();
+Console.WriteLine("Value of resource: " + resource);
+Console.WriteLine("Time elapsed for Test2 file: {0}", sw.Elapsed);
 
 Task Test0()
 {
