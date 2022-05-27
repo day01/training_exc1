@@ -37,6 +37,7 @@ public class WeatherForecastController : ControllerBase
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            // Mega istotnym fragmentem kodu
             Thread.Sleep(TimeSpan.FromSeconds(5));
             _logger.LogInformation("WeatherForecast request positive at {EndOfRequest}", DateTime.Now);
         });

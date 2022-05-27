@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApmApp", "ConsoleApm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{CE1C6E24-4ACC-49DF-9131-18AAD508CC6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleIOOperationApp", "ConsoleIOOperationApp\ConsoleIOOperationApp.csproj", "{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{CE1C6E24-4ACC-49DF-9131-18AAD508CC6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE1C6E24-4ACC-49DF-9131-18AAD508CC6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE1C6E24-4ACC-49DF-9131-18AAD508CC6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
