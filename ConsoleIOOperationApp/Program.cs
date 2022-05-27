@@ -54,6 +54,26 @@ Task Test0()
     return Task.WhenAll(t1, t2, t3, t4, t5);
 }
 
+Task Test1()
+{
+    var t1 = Task.Run(Increment1);
+    var t2 = Task.Run(Increment1);
+    var t3 = Task.Run(Increment1);
+    var t4 = Task.Run(Increment1);
+    var t5 = Task.Run(Increment1);
+    return Task.WhenAll(t1, t2, t3, t4, t5);
+}
+
+Task Test2()
+{
+    var t1 = Task.Run(Increment2);
+    var t2 = Task.Run(Increment2);
+    var t3 = Task.Run(Increment2);
+    var t4 = Task.Run(Increment2);
+    var t5 = Task.Run(Increment2);
+    return Task.WhenAll(t1, t2, t3, t4, t5);
+}
+
 void Increment()
 {
     for (var i = 0; i < 100_000; i++)
@@ -62,5 +82,26 @@ void Increment()
         // wiec wartosc resource w pamieci bedzie wieksza o 1
         // zapis laduje w tym samym miejscu czyli resource
         resource++;
+    }
+}
+
+void Increment1()
+{
+    for (var i = 0; i < 100_000; i++)
+    {
+        lock (obj)
+        {
+            resource1++;
+        }
+    }
+}
+
+void Increment2()
+{
+    for (var i = 0; i < 100_000; i++)
+    {
+        rwl.EnterWriteLock();
+        resource2++;
+        rwl.ExitWriteLock();
     }
 }
