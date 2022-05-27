@@ -12,21 +12,35 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ITaskQueue _taskQueue;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(
+        ILogger<WeatherForecastController> logger,
+        ITaskQueue taskQueue)
     {
         _logger = logger;
+        _taskQueue = taskQueue;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+
+        _taskQueue.Queue((cancellationToken) =>
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+            _logger.LogInformation("WeatherForecast request positive at {EndOfRequest}", DateTime.Now);
+        });
+
+        return result;
     }
 }
