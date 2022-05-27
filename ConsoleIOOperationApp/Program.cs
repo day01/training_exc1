@@ -10,17 +10,41 @@ Console.WriteLine("Worker Threads: {0}", workerThreads);
 Console.WriteLine("CompletionPort Threads: {0}", completionPortThreads);
 
 var resource = 0;
-
+var resource1 = 0;
+var resource2 = 0;
+var fileService = new FileService();
 var sw = new Stopwatch();
+var obj = new Object();
+var rwl = new ReaderWriterLockSlim();
 
 sw.Start();
-Test1().Wait();
-
+Test0().Wait();
 sw.Stop();
 Console.WriteLine("Value of resource: " + resource);
+Console.WriteLine("Time elapsed for Test0: {0}", sw.Elapsed);
+
+sw.Reset();
+sw.Start();
+Test1().Wait();
+sw.Stop();
+Console.WriteLine("Value of resource: " + resource1);
 Console.WriteLine("Time elapsed for Test1: {0}", sw.Elapsed);
 
-Task Test1()
+sw.Reset();
+sw.Start();
+Test2().Wait();
+sw.Stop();
+Console.WriteLine("Value of resource: " + resource2);
+Console.WriteLine("Time elapsed for Test1: {0}", sw.Elapsed);
+
+//
+// sw.Start();
+// fileService.Test1().Wait();
+// sw.Stop();
+// Console.WriteLine("Value of resource: " + resource);
+// Console.WriteLine("Time elapsed for Test1: {0}", sw.Elapsed);
+
+Task Test0()
 {
     var t1 = Task.Run(Increment);
     var t2 = Task.Run(Increment);
