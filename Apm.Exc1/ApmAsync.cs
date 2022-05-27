@@ -46,26 +46,30 @@ public class ApmAsync
         }
     }
 
-    private void GenAndReadFile()
+    private async Task GenAndReadFile(CancellationToken cancellationToken)
     {
         var sw = new Stopwatch();
         sw.Start();
         var path = "./dummy_file_" + Random.Shared.NextInt64();
         GenerateDummyFile(path);
         _eventHandler("target file", new TargetFileIsGenerated());
-        
-        var bytes = File.ReadAllBytes(path);
-        var keybytes = File.ReadAllBytes("./dummy_file_key");
-        Thread.Sleep(TimeSpan.FromSeconds(10));
-        HMACSHA512.HashData(keybytes, bytes);
+
+        cancellationToken.ThrowIfCancellationRequested();
+        var delay = Task.Delay(TimeSpan.FromSeconds(10));
+        var bytes = await Task.WhenAll(
+            File.ReadAllBytesAsync(path, cancellationToken),
+            File.ReadAllBytesAsync("./dummy_file_key", cancellationToken)
+            );
+
+        await delay;
+
+        HMACSHA512.HashData(bytes[1], bytes[0]);
         _eventHandler("SHA", new ShaCalculated());
         sw.Stop();
     }
 
-    public IAsyncResult CalculateSha()
+    public Task CalculateSha(CancellationToken cancellationToken)
     {
-        return Task.Run(GenAndReadFile);
+        return GenAndReadFile(cancellationToken);
     }
-
-    private delegate void AsyncMethod();
 }

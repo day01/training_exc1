@@ -6,27 +6,15 @@ Console.WriteLine("Hello, World!");
 
 var a = new ApmAsync();
 var count = int.Parse(args[0]);
-var list = new List<IAsyncResult>();
+var list = new List<Task>();
+var cancellationToken = new CancellationToken();
 
 Console.WriteLine("start");
 for (var i = 0; i < count; i++)
 {
-    list.Add(a.CalculateSha());
+    list.Add(a.CalculateSha(cancellationToken));
 }
 
-foreach (var asyncResult in list)
-{
-    if (asyncResult.IsCompleted)
-    {
-        if (list.Any(x => !x.IsCompleted))
-        {
-            continue;
-        }
-
-        break;
-    }
-    asyncResult.AsyncWaitHandle.WaitOne(10);
-}
-Thread.Sleep(TimeSpan.FromSeconds(10));
+Task.WhenAll(list);
 
 Console.WriteLine("end");

@@ -7,7 +7,7 @@ public class Program
 {
     public static event EventHandler<IPHostEntry> HostEntryDownloaded;
     
-    public static void Main()
+    public static async Task Main()
     {
         HostEntryDownloaded += LogDnsInformation;
         HostEntryDownloaded += LogDnsInformation2;
@@ -29,10 +29,17 @@ public class Program
 
             var hostnames = hosts.Split(" ");
 
+            var tasks = new List<Task<IPHostEntry>>();
+            
             foreach (var hostname in hostnames)
             {
-                var result = Dns.BeginGetHostEntry(hostname, callback, hostname);
+                var r = Dns.GetHostEntryAsync(hostname);
+                tasks.Add(r);
+                // var result = Dns.BeginGetHostEntry(hostname, callback, hostname);
             }
+
+            var result = await Task.WhenAll(tasks);
+            
         }
 
         importantLogResultAboutSecuritySoWeHaveToSeeItBeforeExitFromProgram.AsyncWaitHandle.WaitOne();
@@ -50,7 +57,25 @@ public class Program
         try
         {
             var host = Dns.EndGetHostEntry(asyncResult);
-            HostEntryDownloaded.Invoke(host.HostName, host);
+            HostEntryDownloaded.Invoke("send", host);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(loggingPrefix + e);
+        }
+    }
+    
+    public static void AsyncDnsInformation(IPHostEntry entry)
+    {
+        var hostname = entry.HostName;
+        Thread.Sleep(TimeSpan.FromSeconds(5));
+
+        var loggingPrefix = $"Task: '{Thread.CurrentThread.ManagedThreadId}', looking for hostname '{hostname}' | ";
+        Console.WriteLine(loggingPrefix + "Begin");
+        
+        try
+        {
+            HostEntryDownloaded.Invoke("send", entry);
         }
         catch (Exception e)
         {
@@ -60,6 +85,10 @@ public class Program
 
     public static void LogDnsInformation(object? sender, IPHostEntry hostEntry)
     {
+        if (hostEntry is Object)
+        {
+            
+        }
         var loggingPrefix = $"Task: '{Thread.CurrentThread.ManagedThreadId}', looking for hostname '{sender}' | ";
 
         Console.WriteLine($"{loggingPrefix}Verify information about: {sender}");
