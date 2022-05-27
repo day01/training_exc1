@@ -5,6 +5,10 @@ using System.Runtime.CompilerServices;
 
 Console.WriteLine("Great Oponeo App!");
 
+ThreadPool.GetMaxThreads(out var workerThreads, out var completionPortThreads);
+Console.WriteLine("Worker Threads: {0}", workerThreads);
+Console.WriteLine("CompletionPort Threads: {0}", completionPortThreads);
+
 var resource = 0;
 
 var sw = new Stopwatch();
