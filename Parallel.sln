@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebAppli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleIOOperationApp", "ConsoleIOOperationApp\ConsoleIOOperationApp.csproj", "{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpinLockExampleConsoleApp", "SpinLockExampleConsoleApp\SpinLockExampleConsoleApp.csproj", "{AA8F66F9-D6E8-4A5E-A4A3-BE4A340220CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{890D013A-D5C9-4BB5-A884-7B43A1EF9CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA8F66F9-D6E8-4A5E-A4A3-BE4A340220CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA8F66F9-D6E8-4A5E-A4A3-BE4A340220CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA8F66F9-D6E8-4A5E-A4A3-BE4A340220CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA8F66F9-D6E8-4A5E-A4A3-BE4A340220CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
